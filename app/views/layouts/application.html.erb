@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Eventbrite</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://kit.fontawesome.com/2f609438b2.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  </head>
+
+  <header>
+
+    <div class="navbar-area headroom">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                <ul id="nav" class="navbar-nav m-auto">
+                  <li class="nav-item active">
+                      <a class="navbar-brand" href="<%= events_path %>">EventBrite</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="<%= new_event_path %>">Créer un Evènement <span class="sr-only">Créer un évènements</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#contact">Contact</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="navbar-btn d-none d-sm-inline-block">
+                <% if user_signed_in? %>
+                <a class="main-btn" href="<%=user_path(current_user)%>">Mon Profile</a>
+                <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class:"main-btn main-btn-2"%>
+                <% else %>
+                <a class="main-btn" href="<%=new_user_session_path%>">Se Connecter</a>
+                <a class="main-btn main-btn-2" href="<%=new_user_registration_path%>">S'Inscrire</a>
+                <%end%>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <body>
+
+    <% if flash[:success] %>
+      <div class="alert alert-success" role="alert">
+        <div class="success text-center"><%= flash[:success]%></div>
+      </div>
+    <% elsif flash.now[:danger] %>
+    <div class="alert alert-danger" role="alert">
+      <div class="danger text-center"><%= flash.now[:danger]%></div>
+    </div>
+    <% else %>
+    <% end %>
+
+    <%= yield %>
+
+  </body>
+</html>

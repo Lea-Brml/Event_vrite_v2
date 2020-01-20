@@ -1,0 +1,45 @@
+
+
+
+    <h1 style="text-align:center; margin-top:60px; margin-bottom:60px; color:#ED3833; font-size:38px;"> Tu peux y aller ! Balance les infos concernant ton Event ! !</h1>
+
+<div style="background-color:#ED3833; opacity:70%; transform:skewY(-2deg); height:60em; margin-bottom:0px; ">
+  <div class="container text-center py-4" style="transform:skewY(2deg);">
+
+
+    <div style="text-align:center; margin-top:50px;">
+
+    <%= form_tag url_for(action:'update'), method: "patch" do %>
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Titre de l évènement' %></strong><br></p>
+      <%= text_field_tag 'title', @event.title  %>
+      <br /> <br />
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Lieux' %></strong><br></p>
+      <%= text_area_tag 'location', @event.location %>
+      <br /> <br />
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Date de l évènement' %></strong><br></p>
+      <%= text_area_tag 'start_date', @event.start_date %>
+      <br /> <br />
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Durée' %></strong><br></p>
+      <%= text_area_tag 'duration', @event.duration %>
+      <br /> <br />
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Description' %></strong><br></p>
+      <%= text_area_tag 'description', @event.description %>
+      <br /> <br />
+
+      <p style="color:white; font-size:22px;"><strong><%= label_tag 'Prix' %></strong><br></p>
+      <%= text_area_tag 'price', @event.price %>
+      <br /> <br />
+
+
+      <%= submit_tag "Mettre à jour l'Event" %>
+
+    <% end %>
+
+    </div>
+  </div>
+</div>

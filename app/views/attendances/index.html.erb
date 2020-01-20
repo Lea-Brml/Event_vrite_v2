@@ -1,0 +1,35 @@
+<h2 style="text-align:center; font-size:48px; margin-top:40px;margin-bottom:40px;"> Voici la liste des participants à ton évènement !</h2>
+
+
+<div class="card-columns container mx-auto">
+<% @attendance.each do |t| %>
+
+
+    <div class="card shadow" style="width: 20rem; padding-bottom:10px; border-color:#781D47;">
+      <%if t.user.avatar.attached?%>
+        <%= image_tag t.user.avatar, alt: 'avatar', class:"rounded py-2", style:"width:300px; margin-left:10px; " %>
+      <%else%>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSqONfzGXyah7RCWW5G2PbLPEO1Ox9jxrji76UhxPJY0X1v1tLC", class="rounded py-2", style="margin-left:10px; width:300px; size:60%;">
+      <%end%>
+      <div class="card-body">
+        <p class="card-text"> Prénom: <%= t.user.first_name  %></p>
+        <p class="card-text"> Nom : <%= t.user.last_name  %></p>
+        <p class="card-text"><small class="text-muted"> E-mail: <%= t.user.email %></small></p>
+        <p style="padding-top:20px;"></p>
+        <div style="text-align:left; opacity:50%;">
+        </div>
+      </div>
+    </div>
+
+
+<%end%>
+</div>
+
+  <center>
+    <a href="<%= edit_event_path %>"class="btn btn-outline-info", style="text-align:right; margin-bottom:10px; ">
+      Moddifer l'Event
+    </a><br>
+    <a href="<%=event_path%>" class="btn btn-outline-danger" data-confirm="Êtes vous sûr de vouloir supprimer ce gossip?" data-method="DELETE">Supprimer
+      Supprimer l'Event
+    </a>
+  </center>

@@ -1,0 +1,83 @@
+<style>
+
+.jumbotron {
+  height: 440px;
+  background-image: url("https://cdn.pixabay.com/photo/2015/07/10/17/53/cheers-839865_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-attachment:fixed;
+}
+
+</style>
+
+
+<div class="jumbotron jumbotron-fluid" >
+  <div class="container">
+    <h1 style="margin-top:100px; font-size:78px; color:white;" class="display-4"><strong>Hello !</strong> <%= @user.first_name %></h1>
+    <p style="font-size:48px; color:white;" class="lead">Voici ton profil perso à toi. Oui, à toi et rien qu'à toi !.</p>
+  </div>
+</div>
+
+
+
+<% if current_user.id == @userr.find(params[:id]).id %>
+
+
+<center>
+
+      <div class="card shadow" style="width: 20rem; padding-bottom:10px; border-color:#781D47;">
+        <%if @user.avatar.attached?%>
+          <%= image_tag @user.avatar, alt: 'avatar', class:"rounded py-2", style:"width:300px;" %>
+        <%else%>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSqONfzGXyah7RCWW5G2PbLPEO1Ox9jxrji76UhxPJY0X1v1tLC", class="rounded py-2", style="width:300px; size:60%;">
+        <%end%>
+        <div class="card-body">
+          <p class="card-text"> Prénom: <%= @user.first_name  %></p>
+          <p class="card-text"> Nom : <%= @user.last_name  %></p>
+          <p class="card-text"> Description : <%= @user.description  %></p>
+          <p class="card-text"><small class="text-muted"> E-mail: <%= @user.email %></small></p>
+          <%= link_to "Modifier mes Infos", edit_user_registration_path, class:"btn btn-outline-light my-2 my-sm-0", style:"background-color:white; color:#ED3833; border-color:#ED3833;" %>
+          <p style="padding-top:20px;"></p>
+          <div style="text-align:left; opacity:50%;">
+          <%= form_tag user_avatars_path(@user), multipart: true do %>
+            <%= file_field_tag :avatar %>
+            <%= submit_tag "Changer d'Avatar", class:"btn btn-outline-info ", style:"margin-top:12px;" %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+      <br>
+</center>
+
+
+    <div class="jumbotron" style="height:280px;">
+      <h2 class="display-4" style="color:white; font-size:60px; padding-left:120px; padding-top:40px;">Voici la liste des évènements que tu as créé !</h2>
+    </div>
+
+
+    <div class="card-columns container mx-auto">
+
+    <% @event.each do |t| %>
+
+        <center>
+          <div class="card shadow" style="width: 20rem; padding-bottom:10px; border-color:#781D47;">
+            <img class="card-img-top" src="http://www.feteetcompagnie.fr/media//slidefetes__013340400_1443_18052016.jpg" alt="Card image cap">
+            <div class="card-body">
+              <a style="color: #781D47; " class="card-title" href="<%=event_path(t)%>"> <%=t.title %></a>
+              <p class="card-text"> Description : <%= t.description  %></p>
+              <p class="card-text"> Prix : <%= t.price  %></p>
+              <span class="card-text"><small class="text-muted"> Date de l'évènement: <%= t.start_date %></small></span><br>
+              <span class="card-text"><small class="text-muted"> Durée de l'évènement: <%= t.duration %></small></span><br>
+              <span class="card-text"><small class="text-muted"> Lieu : <%= t.location %></small></span><br><p></p>
+              <a  href="<%=edit_event_path(t)%>" class="btn btn-outline-primary" > Modifier l'Event </a>
+              <a href="<%=event_path(t)%>" class="btn btn-outline-danger" data-confirm="Êtes vous sûr de vouloir supprimer ce gossip?" data-method="DELETE">Supprimer</a>
+            </div>
+          </div>
+          <br>
+        </center>
+
+      <%end %>
+    </div>
+
+<%else %> Déso, tu ne peux pas avori accès à cette page.
+<%end %>

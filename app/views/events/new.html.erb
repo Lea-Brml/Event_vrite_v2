@@ -1,0 +1,87 @@
+
+<% if @event.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <p><strong>Nous n'avons pas réussi à créer votre évènement pour la (ou les) raison(s) suivante(s) :</strong></p>
+    <ul>
+      <% @event.errors.full_messages.each do |message| %>
+        <li ><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+
+
+<section id="testimonial" class="testimonial-area pt-180 pb-120">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-xl-5 col-lg-6">
+        <div class="testimonial-left-content mt-45 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.3s">
+          <div class="section-title">
+            <h6 class="sub-title">EventBrite</h6>
+            <h4 class="title">Merci de nous faire confiance !</h4>
+          </div>
+          <ul class="testimonial-line">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+          <p class="text">Duis et metus et massa tempus lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas ultricies, orci molestie blandit interdum. <br> <br> ipsum ante pellentesque nisl, eget mollis turpis quam nec eros. ultricies, orci molestie blandit interdum.</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+
+
+                    <%= form_tag url_for(action: 'create'), method: "post" do %>
+
+                        <input type="hidden" name="authenticity_token" value= <%= form_authenticity_token %> >
+                        <br />
+                        <div class="testimonial-left-content mt-20 wow ">
+                          <div class="section-title">
+                            <h6 class="sub-title">Titre de l'évènement</h6>
+                          </div>
+                        </div>
+
+                        <div class="mb-3 sub-title ">
+                          <%= text_field_tag 'title', "", class: "form-control", placeholder: "Titre" %>
+                        </div>
+
+                        <div class="row">
+                          <div class="col text-muted">
+                            <%= label_tag 'La Date'%> </br>
+                            <%= text_field_tag 'start_date', "", class: "form-control ", placeholder: "2020-01-20 00:00:00"  %>
+                          </div>
+                          <br />
+                          <div class="col text-muted">
+                            <%= label_tag 'La durée (mn) ' %></br>
+                            <%= text_field_tag 'duration', "", class: "form-control"%>
+                          </div>
+                          <div class="col text-muted">
+                            <%= label_tag 'Le prix (€)' %> </br>
+                            <%= text_field_tag 'price', "", class: "form-control"%>
+                          </div>
+                        </div>
+                        </br>
+                        <div class="mb-3 text-muted">
+                          <%= label_tag "Le lieu" %> </br>
+                          <%= text_field_tag 'location', "", class: "form-control", placeholder: "Montpellier"%>
+                        </div>
+
+                        <div class="mb-3 text-muted">
+                          <%= label_tag "Description de l'évènement " %> </br>
+                          <%= text_area_tag 'description', "", class: "form-control", row:"4"%>
+                        </div>
+
+                        <%= submit_tag "Valider", class: 'main-btn btn-lg btn-block'  %>
+                        <br>
+                    <% end %>
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
